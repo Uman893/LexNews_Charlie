@@ -1,0 +1,44 @@
+﻿@model LexNews_Charlie.Models.SubscriptionType
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="mb-0" style="background-color:aliceblue;width:30%;border:black 2px solid;margin-top:5%">
+   <h1 class="ms-3">Create</h1>
+
+    <h5 class="ms-5">SubscriptionType</h5>
+</div>
+
+<div class="row ms-4">
+    <div class="col-md-4" style="border:black 2px solid; color:white">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TypeName" class="control-label text-dark"></label>
+                <input asp-for="TypeName" class="form-control " />
+                <span asp-validation-for="TypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label text-dark"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-dark"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label text-dark"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary text-black" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary m-3 text-black" asp-action="GetSubscriptionTypeList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

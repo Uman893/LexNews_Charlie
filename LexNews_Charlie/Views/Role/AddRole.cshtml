@@ -1,0 +1,15 @@
+﻿@using LexNews_Charlie.Models.ViewModels
+@model RoleViewModel
+@{
+    ViewData["Title"] = "AddRole";
+}
+<h1 class="ms-4"> Add a Role Page</h1>
+<form method="post">
+    <div class="form-group w-2 ms-4 w-25">
+        <label class="ms-4"> Role Name</label>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+    <div asp-validation-summary="ModelOnly">
+    </div>
+    <button class="btn btn-info ms-4"> Save the role</button>
+</form>

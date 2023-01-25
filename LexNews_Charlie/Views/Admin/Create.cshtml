@@ -1,0 +1,81 @@
+﻿@model LexNews_Charlie.Models.ViewModels.DisplayArticleVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1 class="mt-1 ms-3">Create</h1>
+
+<h4 class=" ms-3">Article</h4>
+
+<div class="row ms-5">
+    <div class="col-md-4 mb-2 mt-2 ms-5 w-25 text-light" style="border:red 2px solid;background-color:black">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LinkText" class="control-label"></label>
+                <input asp-for="LinkText" class="form-control" />
+                <span asp-validation-for="LinkText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubTitle" class="control-label"></label>
+                <input asp-for="SubTitle" class="form-control" />
+                <span asp-validation-for="SubTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+           @*     <input asp-for="Content" class="form-control" />*@
+                <textarea asp-for="Content" class="form-control p-5 ">
+
+                </textarea>
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="Model.CategoriesList"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileName" class="form-label"></label>
+                <input asp-for="FileName" class="form-control" />
+                <span asp-validation-for="FileName" class="text-danger"></span>
+            </div>
+            <div class="form-group">               
+                <input asp-for="File" hidden class="form-control" onchange="givevaluetofilename()" />
+            </div>
+            <div class="form-group">
+                <input type="button" value="Choose file" class="btn btn-success" onclick="typevalfunc()" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary ms-2" asp-action="GetArticlesList">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+<script>
+    function givevaluetofilename()
+    {
+        var fileName = document.getElementById("File").value;
+        alert(fileName);
+        document.getElementById("FileName").value = fileName.substring(12);
+    }
+
+    function typevalfunc()
+    {
+        document.getElementById("File").click();
+    }
+</script>

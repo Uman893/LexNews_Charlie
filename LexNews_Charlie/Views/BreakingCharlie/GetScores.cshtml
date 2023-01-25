@@ -1,0 +1,66 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.ViewModels.DisplayScoresVM>
+
+@{
+    ViewData["Title"] = "GetScores";
+}
+
+<h1>GetScores</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>            
+            <th>
+                @Html.DisplayNameFor(model => model.sport_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.commence_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.completed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.home_team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.away_team)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.scores)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.last_update)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>            
+            <td>
+                @Html.DisplayFor(modelItem => item.sport_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.commence_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.completed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.home_team)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.away_team)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.scores)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.last_update)
+            </td>          
+        </tr>
+}
+    </tbody>
+</table>

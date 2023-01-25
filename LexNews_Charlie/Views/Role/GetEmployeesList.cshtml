@@ -1,0 +1,98 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.User>
+
+@{
+    ViewData["Title"] = "GetEmployeesList";
+}
+<h1 class="mt-5 mb-2 ms-4"> Employees List</h1>
+
+<table class="table table-bordered w-50 border-2 ms-4">
+ <thead>
+    <tr>
+            <th> User Name </th>
+            <th> LastName </th>
+            <th> Email </th>
+        </tr>
+ </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td> @item.Email </td>
+               
+                @*<td>
+                    <a class="nav-link" asp-area="" asp-controller="Role" asp-action="AssignRole" class="btn btn-primary"> Assign</a>
+
+                </td>
+*@
+             
+                 @*<td>
+                     <a href="Role/AssignRole/@item.Id/" class="btn btn-outline-warning>Assign"></a> 
+                 </td>*@
+
+                <td>
+                   @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@|
+                    |
+                    <a asp-action="AssignRole" asp-route-id="@item.Id">Assign</a>
+                </td>
+                <td>
+                    <a href="Role/AssignRole/@item.Id/" class="btn btn-outline-warning>Assign"></a>
+                </td>
+
+               
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="nav-link" asp-area="" asp-controller="Role" asp-action ="GetRolesList" class="btn btn-primary">Back to Roles List</a>
+
+
+
+@*
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Assign" asp-route-id="@item.Id">Assign</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+

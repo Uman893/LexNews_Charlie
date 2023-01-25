@@ -1,0 +1,40 @@
+﻿@using Humanizer
+@model IEnumerable<LexNews_Charlie.Models.ViewModels.HistoricalDataVM>
+@{
+    ViewData["Title"] = "GetAreaPrices";
+}
+<div class="text-center">
+    <h1> Area Spot Prices</h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>SE1-H</th>
+                <th>SE1-L</th>
+                <th>SE2-H</th>
+                <th>SE2-L</th>
+                <th>SE3-H</th>
+                <th>SE3-L</th>
+                <th>SE4-H</th>
+                <th>SE4-L</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td> @item.Date.Humanize();</td>
+                    @foreach (var area in item.DateAreaPrices)
+                    {
+                        <td>@area.SpotPriceHigh </td>
+                        <td>@area.SpotPriceLow </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

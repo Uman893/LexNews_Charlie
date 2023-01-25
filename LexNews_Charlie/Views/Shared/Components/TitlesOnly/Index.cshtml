@@ -1,0 +1,41 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Article>
+
+@foreach(var title in Model)
+{
+    <a class="complete-article" asp-area="" asp-route-id="@title.Id" asp-controller="BreakingCharlie" asp-action="DisplCompleteArticle">
+    <div class="card">
+        <img src=@title.ImageLink class="card-img-top" alt="@title.Title">
+        <div class="card-body">
+            <h5 class="card-title">@title.Title</h5>
+            <p>@title.SubTitle</p>
+            <div>
+                <a onclick="Like(@title.Id)" type="button" i class="bi bi-hand-thumbs-up"></a><span id="result1">@title.Likes</span>
+                <a onclick="Dislike(@title.Id)" type="button" i class="bi bi-hand-thumbs-down"></a><span id="result2">@title.DisLikes</span>
+                <a i class="bi bi-eye"></a><span>@title.Views</span>
+            </div>
+        </div>
+    </div>
+    </a>
+    <br />
+
+
+}
+
+<script type="text/javascript">
+    function Like(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Like', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result1').html(data.count);
+            })
+        });
+    }
+    function Dislike(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Dislike', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result2').html(data.count);
+            })
+        });
+    }
+</script>

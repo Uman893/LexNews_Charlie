@@ -1,0 +1,103 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Article>
+
+@{
+    ViewData["Title"] = "EditorsChoice";
+}
+
+<h1>EditorsChoice</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Archived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditorsChoice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateStamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LinkText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Archived)
+                </td>
+                <td>
+                    @if (item.EditorsChoice)
+                    {
+                        <input checked="checked" data-id="@item.Id" name="check" type="checkbox" />
+                    }
+                    else
+                    {
+                        <input data-id="@item.Id" name="check" type="checkbox" />
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@section scripts
+    {
+    <script>
+        $(document).ready(function () {
+            $(document).on("change", "[name='check']", function () {
+                var id = $(this).data('id');
+                console.log(id);
+                var URL = "/Admin/EditorsChoice/";
+                var activate = $(this);
+                $.ajax({
+                    url: URL,
+                    data: { id },
+                    type: 'POST',
+                    success: function (result) {
+                        // { editorsChoice: true } result object
+                        console.log(result.editorsChoice);
+                        //a.html(result).add("editorschoice");
+                    }
+                });
+
+            });
+        });
+
+    </script>
+}

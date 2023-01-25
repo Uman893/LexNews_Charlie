@@ -1,0 +1,66 @@
+﻿@model LexNews_Charlie.Models.Currency
+
+<h3 class="text-center">Supported Currencies</h3>
+<div style="background-color:black">
+<marquee font style="bold" scrolldelay="100"><font size="5" face="Verdana" color="#0FFF50">"SGD","MYR","EUR","USD","AUD","JPY","CNH","HKD","CAD","INR","DKK","GBP","RUB","NZD","MXN","IDR","TWD","THB","VND"</font></marquee>
+</div>
+<div class="container-flex">
+    <div class="finance">
+        <div class="row">
+            <div class="col-sm-3 p-4 text-center">
+                <form asp-action="GetCurrency" asp-controller="Home" id="moneyVal">
+                    <div class="form-group">
+                        <label asp-for="from" class="control-label">From:</label>
+                        <input asp-for="from" class="form-control w-100" />
+                        <span asp-validation-for="from" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="to" class="control-label">To:</label>
+                        <input asp-for="to" class="form-control w-100" />
+                        <span asp-validation-for="to" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="q" class="control-label">Amount:</label>
+                        <input asp-for="q" class="form-control w-100">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-1 p-2"></div>
+            <div class="col-sm-3 p-4">
+                <p class="text-center h3">Current Exchange rate: <span id="exchangerate" maxlength="4"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $("#moneyVal").submit(function (v) {
+        v.preventDefault();
+        console.log(v);
+        console.log(v.formData);
+        const from = $("#from").val();
+        const to = $("#to").val();
+        const q = $("#q").val();
+        $.ajax({
+            type: "Post",
+            url: '/Home/GetCurrency',
+            dataType: "Json",
+            data: {
+                from: from,
+                to: to,
+                q: q
+            },
+            success: function (data) {
+                console.log(data);
+                var der = document.getElementById("exchangerate");
+                der.style.color = "red";
+                der.innerText = data;
+            },
+        });
+    });
+</script>
+

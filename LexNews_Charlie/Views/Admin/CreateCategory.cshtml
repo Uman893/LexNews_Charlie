@@ -1,0 +1,42 @@
+﻿@model LexNews_Charlie.Models.Category
+
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+
+<div class="container-flex p-3" style="background-color:aliceblue;border: #b69e17 2px solid;margin-top:4%;margin-bottom:2px;width:50%">
+
+    <h1 class="w-25"> Create Category</h1>
+
+    <div>
+        <div class="row">
+            <div class="col-md-3">
+                <form asp-action="CreateCategory">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">New Category Name</label>
+                        <input asp-for="Name" class="form-control w-100" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>             
+        </div>             
+    </div>   
+  </div>
+</div>
+<br />
+<div class="container-flex p-3" style="background-color:aliceblue;border: #b69e17 2px solid;margin-top:4%;width:50%">
+        <vc:editors-choice></vc:editors-choice>
+</div>
+   
+   <input type="button" class="btn btn-primary mb-3" value="Back to List" asp-action="GetArticlesList" 
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

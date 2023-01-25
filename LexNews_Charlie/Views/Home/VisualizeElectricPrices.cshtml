@@ -1,0 +1,55 @@
+﻿@using LexNews_Charlie.Models.ViewModels
+@using Humanizer
+@using System.Globalization
+@model IEnumerable<HistoricalDataVM>
+
+@{
+    ViewData["Title"] = "VisualizeElectricPrices";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Result Visualization</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {          
+            google.charts.load('current', {
+                'packages': ['corechart']
+            });
+            google.charts.setOnLoadCallback(drawChart);
+        });
+
+        function drawChart() {
+            const data = google.visualization.arrayToDataTable([
+                ["Date", "SE1", "SE2", "SE3", "SE4"],
+                @foreach(var item in Model)
+                {
+                    <text>
+                    [
+                        "@item.Date.Humanize()",
+                        @foreach(var spot in item.DateAreaPrices) {
+                            <text>@spot.SpotPriceHigh.ToString(CultureInfo.InvariantCulture),</text>
+                        }
+                    ],
+                    </text>
+                }
+            ]);
+
+            const options = {
+                title: "Prices",
+                curveType: "function",
+                legend: { position: "bottom" }
+            }
+
+            const chart = new google.visualization.LineChart(document.getElementById("Linechart_div"));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div id="Linechart_div"></div>
+</body>
+</html>

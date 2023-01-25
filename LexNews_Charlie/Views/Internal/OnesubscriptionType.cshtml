@@ -1,0 +1,11 @@
+﻿@*@model IEnumerable<SubscriptionType>
+
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">@Item.TypeName</h5>
+        <p class="card-text">@Model.Description</p>
+        <p class="card-text">@Model.Price</p>
+        @*<a asp-area="" asp-controller="Payment" asp-action="CreateSubscription"><input type="button" value="Check Out" /></a>*@
+        <a asp-route-id="@Model.Id" asp-action="CreateSubscription"><input type="button" value="Check Out" /></a>
+    </div>
+</div>

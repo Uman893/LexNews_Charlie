@@ -1,0 +1,37 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Category>
+
+
+<nav class=" navbar-2 navbar-expand-lg">
+    <div class="nav-2 container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="bi bi-caret-down-square-fill text-dark m-3" style="font-weight:bold"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </li>
+                @foreach (var item in Model)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-route-id=@item.Id asp-controller="BreakingCharlie" asp-action="DisplayCategory">@item.Name</a>
+                    </li>
+                }
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="nav-link-b" asp-area="" asp-controller="BreakingCharlie" asp-action="Weather">Weather</a></li>
+                        <li><a class="nav-link-b" asp-area="" asp-controller="Home" asp-action="Services">Currency Converter</a></li>
+                        <li><a class="nav-link-b" asp-area="" asp-controller="Home" asp-action="GetAreaPrices">Business</a></li>
+                        <li><a class="nav-link-b" asp-area="" asp-controller="Home" asp-action="ShowCharts">Electricity Prices</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

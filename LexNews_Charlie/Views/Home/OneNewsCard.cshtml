@@ -1,0 +1,17 @@
+﻿@using Humanizer;
+@model IEnumerable<Article>
+
+    @foreach(var item in Model)
+    {
+    <div class="card">
+        <img src="@item.ImageLink" class="card-img-top" alTitlet="@item.">
+        <div class="card-body">
+            <h5 class="card-title">@item.Title</h5>
+            <a class="card-text">@item.DateStamp.Humanize();</a>
+            <p class="card-text">@item.Content</p>
+            <a class="btn btn-outline-secondary" asp-area="" asp-route-id="@item.Id" asp-controller="BreakingCharlie" asp-action="DisplCompleteArticle">Go to article</a>
+            <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Home</a>
+            <a i class="bi bi-eye"></a><span>@item.Views</span>           
+        </div>
+    </div>
+    }

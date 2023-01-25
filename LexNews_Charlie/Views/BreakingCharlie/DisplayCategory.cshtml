@@ -1,0 +1,62 @@
+﻿@using Humanizer;
+@model IEnumerable<LexNews_Charlie.Models.Article>
+
+@{
+    ViewData["Title"] = "Fav Category";
+}
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+
+<div class="container-flex">
+    <div class="row justify-content:flex-start;">
+        <div class="col-sm-7 mt-5">
+
+            @foreach (var item in Model)
+            {
+
+                <div class="card" style="margin-bottom:10px; border-radius:20px">
+                    <img src=@Html.DisplayFor(modelItem => item.ImageLink)>
+                    <a class="complete-article" asp-area="" asp-route-id="@item.Id" asp-controller="BreakingCharlie" asp-action="DisplCompleteArticle">
+                        <div class="card-body">
+                            <h4 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h4>
+                            <p>@Html.DisplayFor(modelItem => item.SubTitle)</p>
+                            <p class="card-text">@Html.DisplayFor(modelItem => item.Content)</p>
+                            <p>@Html.DisplayFor(modelItem => item.DateStamp)</p>
+                        </div>
+                        <div class="ms-3 mt-0">
+                            <a onclick="Like(@item.Id)" type="button" i class="bi bi-hand-thumbs-up"></a><span id="result1">@item.Likes</span>
+                            <a onclick="Dislike(@item.Id)" type="button" i class="bi bi-hand-thumbs-down"></a><span id="result2">@item.DisLikes</span>
+                            <a i class="bi bi-eye"></a><span>@item.Views</span>                            
+                        </div>
+                    </a>
+                </div>
+
+            }
+        </div>
+        <div class="col-sm-1"></div>
+        <div class="col-sm-3 mt-5">
+            <h4 class="text-center">People also viewed</h4>
+            <vc:titles-only></vc:titles-only>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Like(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Like', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result1').html(data.count);
+            })
+        });
+    }
+    function Dislike(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Dislike', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result2').html(data.count);
+            })
+        });
+    }
+</script>

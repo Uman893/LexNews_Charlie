@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Administration";
+}
+
+
+<h1 class="  mt-5 text-dark " style="margin-left:15%"> Administration </h1>
+<div class="admin-adn mb-4" style="text-align:center;margin-left:15%;">
+    @if (User.IsInRole("Editor"))
+    {
+        <a class="nav-link border border-dark  text-dark fw-bolder" asp-area="" asp-controller="Admin" asp-action="GetArticlesList">Articles List</a>
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="Admin" asp-action="EditorsChoice">Editor's Choice</a>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="SubscriptionType" asp-action="GetSubscriptionTypeList">Subscriptions type list</a>
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="Category" asp-action="GetCategoryList">Categories list</a>
+        <a class="nav-link border border-dark  text-dark fw-bolder" asp-area="" asp-controller="Role" asp-action="GetUsersList">Users list</a>
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="Role" asp-action="GetRolesList">Roles list</a>
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="Role" asp-action="GetEmployeesList"> Employees List</a>
+        <a class="nav-link border border-dark text-dark fw-bolder" asp-area="" asp-controller="Admin" asp-action="SubscriptionStatistics">Subscription statistics</a>
+    }
+</div>

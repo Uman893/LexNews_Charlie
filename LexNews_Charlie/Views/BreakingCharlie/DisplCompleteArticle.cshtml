@@ -1,0 +1,65 @@
+﻿@model LexNews_Charlie.Models.Article
+
+@{
+    ViewData["Title"] = "Breaking Charlie";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+</head>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div>
+            <div class="col-md-9" style="margin-left:150px ;">
+
+                <div class="card">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="25" viewBox="0 0 1300 13" preserveAspectRatio="none"
+                         stroke="#DCDCDC" stroke-width="1" aria-hidden="true" focusable="false" class="dcr-65xb9q">
+                        <line x1="0" x2="1300" y1="0.5" y2="0.5"></line>
+                        <line x1="0" x2="1300" y1="4.5" y2="4.5"></line>
+                        <line x1="0" x2="1300" y1="8.5" y2="8.5"></line>
+                        <line x1="0" x2="1300" y1="12.5" y2="12.5"></line>
+                    </svg>
+                    <img src="@Model.ImageLink" style="border-radius:10px;" alt="@Model.Title">
+                    <div class="card-body">
+                        <h5 class="card-subtitle">@Model.SubTitle</h5>
+                        <p class=" complete-card-text ">@Model.Content</p>
+                        <a i class="bi bg-info"></a>Published: <span>@Model.DateStamp</span>
+                        <br />
+                        <div>
+                            <a onclick="Like(@Model.Id)" type="button" i class="bi bi-hand-thumbs-up"></a><span id="result1">@Model.Likes</span>
+                            <a onclick="Dislike(@Model.Id)" type="button" i class="bi bi-hand-thumbs-down"></a><span id="result2">@Model.DisLikes</span>
+                            <a i class="bi bi-eye"></a><span>@Model.Views</span>
+                        </div>
+                        <a class="btn btn-outline-success" asp-controller="Home" asp-action="Index">Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    function Like(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Like', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result1').html(data.count);
+            })
+        });
+    }
+    function Dislike(Id) {
+        $.ajax({
+            type: "Post", url: '/BreakingCharlie/Dislike', dataType: "Json", Cache: false, data: { id: Id },
+            success: (function (data) {
+                $('#result2').html(data.count);
+            })
+        });
+    }
+</script>
+
+
+

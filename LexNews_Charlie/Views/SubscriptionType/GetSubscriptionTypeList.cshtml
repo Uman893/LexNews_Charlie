@@ -1,0 +1,47 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.SubscriptionType>
+
+@{
+    ViewData["Title"] = "GetSubscriptionTypeList";
+}
+
+<h1 class="ms-5" style="padding:1rem">Subscription types</h1>
+
+<table class="table w-50 ms-1" style="background-color:aliceblue;border:black 2px solid">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>

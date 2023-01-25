@@ -1,0 +1,38 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Category>
+
+@{
+    ViewData["Title"] = "GetCategoryList";
+}
+
+<h1 class="ms-2">GetCategoryList</h1>
+
+<p>
+    <a class="ms-3" asp-action="Create">Create New</a>
+</p>
+<table class="table w-25 ms-5 mb-1">
+    
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="">
+                <td >
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td >
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,67 @@
+﻿@model LexNews_Charlie.Models.ViewModels.DisplayWeatherVM
+
+<div class="Weather-Api">
+    <h1 class=" text-center">Check the current weather in your city</h1>
+    <div class="container-flex">
+        <div class="row">
+            <div class="col-sm-3 p-3">
+                <form asp-action="GetWeather" asp-controller="BreakingCharlie" id="WeatherForm">
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label text-light">Chose your city:</label>
+                        <input asp-for="City" value="London" class="form-control w-100" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-3 p-3">
+                <main class="container">
+                       <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-title">Country: <span id="lblCountry"></span></h3>
+                                    <p class="card-text">City: <span id="lblCity"></span></p>
+                                    <h5 class="card-title">Description: <span id="lblDescription"></span></h5>
+                                    <p class="card-text">Humidity: <span id="lblHumidity"></span></p>
+                                    <p class="card-text">Temperature: <span id="lblTemperature"></span></p>
+                                    <p class="card-text">Feels Like: <span id="lblTempFeelsLike"></span></p>
+                                </div>
+                            </div>
+                        </div>                    
+                </main>
+            </div>           
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#WeatherForm").submit(function (e) {
+        e.preventDefault();
+        console.log(e);
+        console.log(e.formData);
+        const city = $("#City").val();
+        $.ajax({
+            type: "Post",
+            url: '/BreakingCharlie/GetWeather',
+            dataType: "Json",
+            data: {
+                City: city
+            },
+            success: function (data) {
+                console.log(data);
+                $("#lblCountry").html(data.country);
+                $("#lblCity").html(data.city);
+                $("#lblDescription").html(data.description);
+                $("#lblHumidity").html(data.humidity);
+                $("#lblTemperature").html(data.temp);
+                $("#lblTempFeelsLike").html(data.tempFeelsLike);
+                $("#imgWeatherIconUrl").attr("src", "http://openweathermap.org/img/w/" + data.weatherIcon + ".png");
+            },
+            error: function () {
+
+            }
+        });
+    });
+</script> 

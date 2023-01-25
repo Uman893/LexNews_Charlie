@@ -1,0 +1,27 @@
+﻿@using LexNews_Charlie.Models.ViewModels
+
+@model List<RoleAssignVM>
+
+@{
+    ViewData["Title"] = "AssignRole";
+}
+<h1> Assign Role!</h1>
+
+<form method="post">
+    <input type="hidden" name="userId" value="@ViewBag.UserId" />
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check">
+            <input type="hidden" asp-for="@Model[i].Id" />
+            <input type="hidden" asp-for="@Model[i].Name" />
+            <input type="checkbox" asp-for="@Model[i].Exists" class="form-check-input" />
+            <label class="form-check-label" asp-for="@Model[i].Exists">@Model[i].Name </label>
+        </div>
+    }
+    
+    <button type="submit">Save</button>
+</form>
+<br />
+
+<a class="nav-link" asp-area="" asp-controller="Role" asp-action="GetEmployeesList" class="btn btn-primary">Back to Roles List</a>
+

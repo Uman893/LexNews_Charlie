@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Article>
+
+
+@foreach (var item in Model){
+    <a class="complete-article" asp-area="" asp-route-id="@item.Id" asp-controller="BreakingCharlie" asp-action="DisplCompleteArticle">
+    <div class="card" style="width:100%; margin-bottom:10px">
+        <img src="@item.ImageLink" class="card-img-top" alt="@item.Title">
+        <div class="card-body">
+            <h5 class="card-title">@item.Title</h5>
+            <p class="card-text">@item.Content</p>            
+            <div>
+                <a onclick="Like(@item.Id)" type="button" i class="bi bi-hand-thumbs-up"></a><span id="result1">@item.Likes</span>
+                <a onclick="Dislike(@item.Id)" type="button" i class="bi bi-hand-thumbs-down"></a><span id="result2">@item.DisLikes</span>
+                <a i class="bi bi-eye"></a><span>@item.Views</span>
+            </div>
+        </div>
+    </div>
+    </a>
+    <br />
+}
+
+
+

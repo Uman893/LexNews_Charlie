@@ -1,0 +1,60 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+
+<div class="nav-bar-tlog">
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#LoginDropdown" aria-controls="LoginDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="bi bi-caret-down-square-fill"></span>
+</button>
+<div class="collapse navbar-collapse" id="LoginDropdown">
+    <ul class="navbar-nav me-4">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var user = UserManager.GetUserAsync(User).Result;
+            @*await UserManager.AddToRoleAsync(user, "");*@
+            var UserSubs = UserManager.GetUserAsync(User).Result.SubscriptionsList;
+            var UserSubsActive = UserSubs.Where(s => s.Active).FirstOrDefault();
+
+            @if (UserSubsActive == null)
+            {
+                <li class="nav-item">
+                    <a class="nav-link fw-bold " asp-area="" asp-controller="Internal" asp-action="SubscribeNow">Subscribe now</a>
+                </li>
+            }
+
+            <li class="nav-item">
+                <a class="nav-link " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+            </li>
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link text-secondary">Logout</button>
+                </form>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-bold " asp-area="" asp-controller="Internal" asp-action="MyPage">My Page</a>
+            </li>
+
+            @if (User.IsInRole("Admin") || (User.IsInRole("Editor")))
+            {
+                <li class="nav-item">
+                    <a class="nav-link  fw-bold" asp-area="" asp-controller="Admin" asp-action="Administration">Administration</a>
+                </li>
+            }
+        }
+
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link fw-bold " asp-area="" asp-controller="Internal" asp-action="SubscribeNow">Subscribe now</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link fw-bold" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  fw-bold" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            </li>
+        }
+    </ul>
+</div>
+</div>

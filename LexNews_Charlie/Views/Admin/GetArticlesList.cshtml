@@ -1,0 +1,91 @@
+﻿@model IEnumerable<LexNews_Charlie.Models.Article>
+
+@{
+    ViewData["Title"] = "All Articles";
+}
+
+<h1 class="ms-4">Articles List</h1>
+
+<p>
+    <a class="btn btn-primary ms-4" asp-action="Create" type="btn btn-primary">Create New</a>    
+</p>
+
+<table class="table" style="border: black 2px solid">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStamp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Views)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Likes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisLikes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageLink)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.SubTitle)
+            </td>
+            <td class="card-text-a">
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Views)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Likes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisLikes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)                
+            </td>
+            <td>
+                <a class="btn btn-primary m-1"style="width:77%" asp-action="Edit" asp-route-id="@item.Id">Edit</a>                
+                <a class="btn btn-primary m-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary m-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
